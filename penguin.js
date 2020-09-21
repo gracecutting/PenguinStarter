@@ -2,8 +2,10 @@ var penguinPromise= d3.json("classData.json");
 var successFCN= function(penguins)
 {
     console.log("Data Collected", penguins);
-    drawTable(penguins);
-    sortFinal(penguins);
+     sortFinal(penguins);
+     drawTable(penguins)
+   ;
+   
     
 }
 var failFCN= function(errormessage)
@@ -88,11 +90,11 @@ var compareFinal= function(penguin1, penguin2)
     var finalGrade1= penguin1.finalGrade
     var finalGrade2= penguin2.finalGrade
     
-    if (finalGrade1== finalGrade2)
+    if (penguin1.final[0].grade== penguin2.final[0].grade)
     { 
         return 0;
     }
-    else if (finalGrade1 => finalGrade2)
+    else if (penguin1.final[0].grade>penguin2.final[0].grade)
     {
         return 1
     }
@@ -104,15 +106,16 @@ var compareFinal= function(penguin1, penguin2)
 
 var sortFinal = function(penguins)
 {
-    d3.select("#finalGrade")
-        .on("click", function()
-            {
-        penguins.sort(compareFinal)
+ d3.select("#finalGrade")
+     .on("click", function()
+     {
+penguins.sort(compareFinal)
     
-            d3.select("table tbody")
-                .selectAll("*")
-                .remove()
-            drawTable=("compareFinal")})
-    console.log(sortFinal)
+ d3.select("table tbody")
+    .selectAll("*")
+    .remove()
+    drawTable(penguins)
+    })
+
 
 }
